@@ -1,0 +1,48 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.hads-network/hads",
+  "description": "HADS ad exchange: serve ads in terminals and AI answers, manage sites, ads and stats.",
+  "version": "0.1.1",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "hads-cli",
+      "version": "0.1.1",
+      "transport": {
+        "type": "stdio"
+      },
+      "packageArguments": [
+        {
+          "type": "positional",
+          "value": "mcp"
+        }
+      ],
+      "environmentVariables": [
+        {
+          "name": "HADS_TOKEN",
+          "description": "Access token from hads.dev/app (Tokens)",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://api.hads.dev/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Bearer <token from hads.dev/app, Tokens>",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ],
+  "repository": {
+    "url": "https://github.com/hads-network/cli",
+    "source": "github"
+  }
+}

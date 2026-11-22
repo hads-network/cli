@@ -1,0 +1,48 @@
+{
+  "name": "hads-cli",
+  "version": "0.1.1",
+  "mcpName": "io.github.hads-network/hads",
+  "description": "HADS from the terminal and for AI agents: a CLI and an MCP server for the HADS ad exchange.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "hads": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.17"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json && chmod +x dist/cli.js",
+    "dev": "tsc -p tsconfig.json --watch",
+    "test": "npm run build && node --test test/*.test.mjs"
+  },
+  "keywords": [
+    "hads",
+    "ads",
+    "cli",
+    "mcp",
+    "model-context-protocol",
+    "agents"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "typescript": "^7.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hads-network/cli.git"
+  },
+  "homepage": "https://hads.dev/en/docs#agents",
+  "bugs": {
+    "url": "https://github.com/hads-network/cli/issues"
+  }
+}
