@@ -248,7 +248,8 @@ async function main() {
       const amount = Number(need(sub, "Usage: hads buy <usd>"));
       const order: any = await api.checkout({ amount_usd: amount });
       return out(flags, order, () => {
-        console.log(`Order ${order.id}: ${order.quantity ?? "?"} impressions for $${order.amount_usdc ?? amount} USDC.`);
+        const price = order.provider === "stripe" ? `$${order.price_usd ?? amount} + tax, by card` : `$${order.amount_usdc ?? amount} USDC`;
+        console.log(`Order ${order.id}: ${order.quantity ?? "?"} impressions for ${price}.`);
         if (order.pay_url) console.log(`Pay here: ${order.pay_url}`);
       });
     }

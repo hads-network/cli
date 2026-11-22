@@ -175,7 +175,7 @@ export const tools: ToolDef[] = [
     name: "hads_buy_impressions",
     title: "Buy impressions",
     description:
-      "Start a top-up: returns a payment link (USDC) for the person to open and pay. Nothing is charged until they pay. " +
+      "Start a top-up: returns a payment link (a card checkout; tax is added for the buyer's country) for the person to open and pay. Nothing is charged until they pay. " +
       "Show the link to the person; never pay on their behalf.",
     input: { amount_usd: z.number().min(1).describe("Amount in USD (the network minimum applies, see hads_pricing)") },
     write: true,
