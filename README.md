@@ -35,7 +35,7 @@ Install it globally to type `hads` instead: `npm i -g hads-cli`.
 | `hads ads pause <id>` · `ads resume <id>` · `ads rm <id>` | Ad status |
 | `hads topics` | Topic slugs |
 | `hads stats [--days 7\|30]` · `hads sources [--role publisher\|advertiser]` | Numbers |
-| `hads pricing` · `hads buy <usd>` | Quotes; a payment link for a top-up |
+| `hads pricing` · `hads buy <usd> [--usdc]` | Quotes; a payment link for a top-up (card, or USDC with `--usdc`) |
 | `hads serve --site-key site_… [--format ansi\|text\|json] [--topic slug]` | An ad to show |
 | `hads tokens` · `tokens create <name> [--read]` · `tokens revoke <id>` | Access tokens |
 | `hads mcp` | The MCP server on stdio |
