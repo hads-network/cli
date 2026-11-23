@@ -58,7 +58,7 @@ Numbers and money
   stats [--days 7|30]            Impressions, clicks and CTR
   sources [--days 7|30] [--role publisher|advertiser]
   pricing                        Network quotes and packs
-  buy <usd>                      Start a top-up; prints the payment link
+  buy <usd> [--usdc]             Start a top-up (card; --usdc for Solana)
 
 Showing ads (no login needed)
   serve --site-key site_… [--format ansi|text|json] [--topic slug]
@@ -245,10 +245,11 @@ async function main() {
       return out(flags, await api.pricing());
 
     case "buy": {
-      const amount = Number(need(sub, "Usage: hads buy <usd>"));
-      const order: any = await api.checkout({ amount_usd: amount });
+      const amount = Number(need(sub, "Usage: hads buy <usd> [--usdc]"));
+      const order: any = await api.checkout({ amount_usd: amount, method: flags.usdc ? "usdc" : undefined });
       return out(flags, order, () => {
-        console.log(`Order ${order.id}: ${order.quantity ?? "?"} impressions for $${order.amount_usdc ?? amount} USDC.`);
+        const price = order.provider === "stripe" ? `$${order.price_usd ?? amount} + tax, by card` : `$${order.amount_usdc ?? amount} USDC`;
+        console.log(`Order ${order.id}: ${order.quantity ?? "?"} impressions for ${price}.`);
         if (order.pay_url) console.log(`Pay here: ${order.pay_url}`);
       });
     }

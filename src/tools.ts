@@ -175,10 +175,16 @@ export const tools: ToolDef[] = [
     name: "hads_buy_impressions",
     title: "Buy impressions",
     description:
-      "Start a top-up: returns a payment link (USDC) for the person to open and pay. Nothing is charged until they pay. " +
+      "Start a top-up: returns a payment link for the person to open and pay, by card (tax added for their country) or in USDC on Solana. Nothing is charged until they pay. " +
       "Show the link to the person; never pay on their behalf.",
-    input: { amount_usd: z.number().min(1).describe("Amount in USD (the network minimum applies, see hads_pricing)") },
+    input: {
+      amount_usd: z.number().min(1).describe("Amount in USD (the network minimum applies, see hads_pricing)"),
+      method: z
+        .enum(["card", "usdc"])
+        .optional()
+        .describe("card (Stripe, tax added) or usdc (Solana Pay); default card. hads_pricing lists what is on offer"),
+    },
     write: true,
-    run: (api, a) => api.checkout({ amount_usd: a.amount_usd }),
+    run: (api, a) => api.checkout({ amount_usd: a.amount_usd, method: a.method }),
   },
 ];

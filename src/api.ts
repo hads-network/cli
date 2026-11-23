@@ -69,7 +69,7 @@ export class HadsApi {
   pricing() {
     return this.request("GET", "/v1/pricing", { auth: false });
   }
-  checkout(opts: { amount_usd?: number; quantity?: number }) {
+  checkout(opts: { amount_usd?: number; quantity?: number; method?: "card" | "usdc" }) {
     return this.request("POST", "/v1/payments/checkout", { body: opts });
   }
   payment(id: string) {
